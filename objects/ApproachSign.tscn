@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://g18hm4k8l48i"]
+
+[ext_resource type="Texture2D" uid="uid://nsadwp8ecpe4" path="res://assets/approach_background.png" id="1_ow3f5"]
+[ext_resource type="Texture2D" uid="uid://27horpf78jn5" path="res://assets/yellow_light.png" id="2_qesss"]
+
+[node name="ApproachSign" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ow3f5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -31.0
+offset_top = -16.0
+offset_right = 33.0
+offset_bottom = 7.0
+text = "上り接近"
+
+[node name="Light" type="Sprite2D" parent="."]
+position = Vector2(0, 17.54)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_qesss")
