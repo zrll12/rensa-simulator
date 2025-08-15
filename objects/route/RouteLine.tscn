@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ca6bmdxk4rp"]
+
+[ext_resource type="Texture2D" uid="uid://cjct0sc3pr20r" path="res://assets/sprites/route/route_line.png" id="1_7s3bv"]
+[ext_resource type="Script" uid="uid://cio8bbvtyu0ek" path="res://objects/route/simple_color_replace.gd" id="1_i2tph"]
+
+[node name="RouteLine" type="Node2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_i2tph")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7s3bv")

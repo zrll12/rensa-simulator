@@ -4,4 +4,10 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>RensaSimulator</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Godot.Logging" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="objects\" />
+  </ItemGroup>
 </Project>

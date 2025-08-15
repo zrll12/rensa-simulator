@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://cp5doqou3q37i"]
+
+[ext_resource type="Texture2D" uid="uid://by45es16cwthl" path="res://assets/sprites/switch_lnr.png" id="1_fuo4y"]
+[ext_resource type="Script" uid="uid://b5ieaxtkpdleo" path="res://objects/Switch.cs" id="1_x25do"]
+[ext_resource type="Texture2D" uid="uid://dxaf72xob2b6e" path="res://assets/sprites/switch_ncr.png" id="2_x25do"]
+[ext_resource type="Texture2D" uid="uid://yldua4clrvbq" path="res://assets/sprites/switch_ln.png" id="3_osds5"]
+[ext_resource type="Texture2D" uid="uid://bx0l6wxtfwg7n" path="res://assets/sprites/switch_nr.png" id="4_4ctvt"]
+[ext_resource type="Texture2D" uid="uid://c3p735lumjoaa" path="res://assets/sprites/switch_black.png" id="5_lhq8j"]
+[ext_resource type="Texture2D" uid="uid://cloynm23l20jy" path="res://assets/sprites/switch_red.png" id="6_itkyt"]
+[ext_resource type="Texture2D" uid="uid://w0q5d41gb7uf" path="res://assets/sprites/tooltip_background.png" id="8_osds5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ctvt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x25do"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_osds5"]
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ctvt"]
+font_size = 100
+
+[node name="Switch" type="Node2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_x25do")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="LNR" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_4ctvt")
+position = Vector2(0, -88)
+texture = ExtResource("1_fuo4y")
+
+[node name="NCR" type="Sprite2D" parent="Background"]
+visible = false
+position = Vector2(0, -88)
+texture = ExtResource("2_x25do")
+
+[node name="LN" type="Sprite2D" parent="Background"]
+visible = false
+position = Vector2(-61, -87)
+texture = ExtResource("3_osds5")
+
+[node name="NR" type="Sprite2D" parent="Background"]
+visible = false
+position = Vector2(61, -87)
+texture = ExtResource("4_4ctvt")
+
+[node name="Switch" type="Node2D" parent="."]
+
+[node name="Black" type="Sprite2D" parent="Switch"]
+texture = ExtResource("5_lhq8j")
+
+[node name="Red" type="Sprite2D" parent="Switch"]
+visible = false
+position = Vector2(1, 0)
+texture = ExtResource("6_itkyt")
+
+[node name="Label" type="Label" parent="Switch"]
+offset_left = -25.0
+offset_top = -21.0
+offset_right = 32.0
+offset_bottom = 116.0
+text = "1"
+label_settings = SubResource("LabelSettings_x25do")
+
+[node name="Collision" type="Area2D" parent="."]
+visible = false
+
+[node name="Shape" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-15, -20, -80, -190, -55, -200, -15, -205, 45, -200, 70, -195, 125, -170, 145, -155, 175, -125, 200, -90, 45, 5, 55, 40, 45, 75, 10, 95, -35, 90, -60, 55, -60, 30, -50, 5, -45, -10)
+
+[node name="Tooltip" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Tooltip"]
+position = Vector2(0, -345)
+texture = ExtResource("8_osds5")
+
+[node name="Label3" type="Label" parent="Tooltip"]
+visible = false
+offset_left = -245.0
+offset_top = -415.0
+offset_right = 255.0
+offset_bottom = -278.0
+text = "L → N → R"
+label_settings = SubResource("LabelSettings_osds5")
+
+[node name="Label2" type="Label" parent="Tooltip"]
+offset_left = -205.0
+offset_top = -415.0
+offset_right = 193.0
+offset_bottom = -278.0
+text = "N   →   R"
+label_settings = SubResource("LabelSettings_4ctvt")

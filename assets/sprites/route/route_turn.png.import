@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://27horpf78jn5"
-path="res://.godot/imported/yellow_light.png-96dc31e46afa9007f40cd076a21a6cff.ctex"
+uid="uid://bsbj7pk1lj4wo"
+path="res://.godot/imported/route_turn.png-75adbdf80936caf1e3f0a027e9105ac5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/yellow_light.png"
-dest_files=["res://.godot/imported/yellow_light.png-96dc31e46afa9007f40cd076a21a6cff.ctex"]
+source_file="res://assets/sprites/route/route_turn.png"
+dest_files=["res://.godot/imported/route_turn.png-75adbdf80936caf1e3f0a027e9105ac5.ctex"]
 
 [params]
 

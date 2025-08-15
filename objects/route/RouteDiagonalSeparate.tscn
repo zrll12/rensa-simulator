@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://qsnfl6piextr"]
+
+[ext_resource type="Texture2D" uid="uid://bcjm4rcuhxjjf" path="res://assets/sprites/route/route_diagonal_separate.png" id="1_eq0eq"]
+[ext_resource type="Script" uid="uid://cujd8ty44rb5k" path="res://objects/route/route_diagonal_separate.gd" id="1_iwtri"]
+
+[node name="RouteDiagonalSeparate" type="Node2D"]
+script = ExtResource("1_iwtri")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_eq0eq")

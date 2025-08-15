@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl8nyi8aumm6j"]
+
+[ext_resource type="Script" uid="uid://dlegivbkp2otu" path="res://objects/RouteLight.cs" id="1_hn118"]
+[ext_resource type="Texture2D" uid="uid://dkns1vo7yejor" path="res://assets/sprites/route_light_off.png" id="1_mfgrf"]
+[ext_resource type="Texture2D" uid="uid://dpxpgwe7yivlj" path="res://assets/sprites/route_light_yellow.png" id="2_hn118"]
+[ext_resource type="Texture2D" uid="uid://0duh6cssg2hy" path="res://assets/sprites/route_light_red.png" id="3_jb6vh"]
+
+[node name="RouteLight" type="Node2D"]
+script = ExtResource("1_hn118")
+
+[node name="Off" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_mfgrf")
+
+[node name="Yellow" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_hn118")
+
+[node name="Red" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_jb6vh")

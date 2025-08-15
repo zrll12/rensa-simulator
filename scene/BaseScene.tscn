@@ -1,19 +1,701 @@
-[gd_scene load_steps=3 format=3 uid="uid://bg2vd2k1ougpy"]
+[gd_scene load_steps=15 format=3 uid="uid://bg2vd2k1ougpy"]
 
 [ext_resource type="Script" uid="uid://belyhrguvfd07" path="res://scene/BaseScene.cs" id="1_yndij"]
 [ext_resource type="PackedScene" uid="uid://g18hm4k8l48i" path="res://objects/ApproachSign.tscn" id="2_hdd6a"]
+[ext_resource type="PackedScene" uid="uid://dgrma6u106uk0" path="res://objects/SignalLight.tscn" id="3_0x8cp"]
+[ext_resource type="PackedScene" uid="uid://ciq6n2m1qsovl" path="res://objects/route/RouteEnd.tscn" id="4_jpmsn"]
+[ext_resource type="PackedScene" uid="uid://b0ca6bmdxk4rp" path="res://objects/route/RouteLine.tscn" id="5_l5v8x"]
+[ext_resource type="PackedScene" uid="uid://cmlhjehc1f3hv" path="res://objects/route/RouteTurn.tscn" id="6_nupqx"]
+[ext_resource type="PackedScene" uid="uid://cya5dgcgg70i0" path="res://objects/route/RouteDiagonal.tscn" id="7_yct3y"]
+[ext_resource type="PackedScene" uid="uid://bs12bk8bv3um3" path="res://objects/route/RouteArrow.tscn" id="8_yct3y"]
+[ext_resource type="PackedScene" uid="uid://qsnfl6piextr" path="res://objects/route/RouteDiagonalSeparate.tscn" id="9_8xlsi"]
+[ext_resource type="PackedScene" uid="uid://cl8nyi8aumm6j" path="res://objects/RouteLight.tscn" id="10_5ltin"]
+[ext_resource type="PackedScene" uid="uid://cp5doqou3q37i" path="res://objects/Switch.tscn" id="11_ocsda"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8xlsi"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ltin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocsda"]
 
 [node name="BaseScene" type="Node2D"]
 script = ExtResource("1_yndij")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -705.0
-offset_top = -484.0
-offset_right = 689.0
-offset_bottom = 441.0
+offset_left = -673.0
+offset_top = -442.0
+offset_right = 721.0
+offset_bottom = 483.0
 color = Color(0.294118, 0.388235, 0.329412, 1)
 
-[node name="ApproachSign" parent="." instance=ExtResource("2_hdd6a")]
-position = Vector2(-426, -188)
+[node name="UpApproach" parent="." instance=ExtResource("2_hdd6a")]
+position = Vector2(-471, -228)
+
+[node name="DownApproach" parent="." instance=ExtResource("2_hdd6a")]
+position = Vector2(489, -216)
+Label = "下り接近"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Map" type="Node2D" parent="."]
+position = Vector2(54, 0)
+
+[node name="RouteEnd3" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-401, -72)
+route_color = Color(0.118949, 0.508029, 0.491579, 1)
+
+[node name="RouteEnd2" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-461, -72)
+route_color = Color(0.0998323, 0.39415, 0.682263, 1)
+
+[node name="RouteEnd" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-521, -72)
+route_color = Color(0.999991, 0.410988, 0.42916, 1)
+
+[node name="RouteLine" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-485, -72)
+scale = Vector2(1.5, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine2" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-425, -72)
+scale = Vector2(1.5, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine3" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-365, -72)
+scale = Vector2(1.5, 0.4)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteEnd4" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-394, -40)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteTurn" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(-371, -25)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteTurn2" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(-317, 35)
+rotation = -3.14159
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd5" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-520, 82)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine4" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-461, 82)
+scale = Vector2(3, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd6" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-414, 82)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine5" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-343, 82)
+scale = Vector2(3.8, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd7" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-294, 50)
+rotation = -3.14159
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd8" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-284, 82)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd9" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-341, -72)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine6" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-236, -72)
+scale = Vector2(6.2, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd10" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-212, 82)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine7" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-242, 82)
+scale = Vector2(1.9, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd11" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-276, 114)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteTurn3" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(-253, 129)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine8" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-171, 82)
+scale = Vector2(1.8, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteDiagonal3" parent="Map" instance=ExtResource("7_yct3y")]
+position = Vector2(-238, 139)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteTurn4" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(-223, 149)
+rotation = -3.14159
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine9" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-208, 164)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd12" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(-200, 164)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteLine10" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(-165, 164)
+scale = Vector2(1.4, 0.4)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteArrow2" parent="Map" instance=ExtResource("8_yct3y")]
+position = Vector2(-131, -72)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteArrow3" parent="Map" instance=ExtResource("8_yct3y")]
+position = Vector2(-132, 82)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteArrow" parent="Map" instance=ExtResource("8_yct3y")]
+position = Vector2(-132, 164)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="Label" type="Label" parent="Map"]
+offset_left = -92.0
+offset_top = -84.0
+offset_right = -12.0
+offset_bottom = -60.0
+text = "（１番線）"
+
+[node name="Label" type="Label" parent="Map/Label"]
+layout_mode = 0
+offset_top = 157.0
+offset_right = 80.0
+offset_bottom = 180.0
+text = "（２番線）"
+
+[node name="Label" type="Label" parent="Map/Label/Label"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 82.0
+offset_right = 78.0
+offset_bottom = 105.0
+text = "（３番線）"
+
+[node name="RouteDiagonalSeparate" parent="Map" instance=ExtResource("9_8xlsi")]
+position = Vector2(-344, 5)
+route1_color = Color(0.117647, 0.509804, 0.490196, 1)
+route2_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteArrow4" parent="Map" instance=ExtResource("8_yct3y")]
+position = Vector2(36, 82)
+rotation = 3.14159
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteArrow5" parent="Map" instance=ExtResource("8_yct3y")]
+position = Vector2(37, 164)
+rotation = 3.14159
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteLine11" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(96, -72)
+scale = Vector2(5, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd13" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(173, -72)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine12" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(262, -72)
+scale = Vector2(5, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd14" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(339, -72)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteLine13" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(386, -72)
+scale = Vector2(2.2, 0.4)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteEnd15" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(433, -72)
+rotation = -3.14159
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteLine14" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(71, 82)
+scale = Vector2(1.5, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine15" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(72, 164)
+scale = Vector2(1.5, 0.4)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteEnd16" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(95, 82)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd17" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(96, 164)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine16" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(154, 82)
+scale = Vector2(3, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteTurn5" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(119, 149)
+scale = Vector2(1, -1)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteDiagonal" parent="Map" instance=ExtResource("7_yct3y")]
+position = Vector2(134, 139)
+rotation = 3.14159
+scale = Vector2(1, -1)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteTurn6" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(149, 129)
+rotation = 3.14159
+scale = Vector2(1, -1)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd18" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(172, 114)
+rotation = -3.14159
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd19" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(201, 82)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteLine17" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(260, 82)
+scale = Vector2(3, 0.4)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteEnd20" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(307, 82)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteLine18" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(344, 82)
+scale = Vector2(1.7, 0.4)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd21" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(371, 82)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteLine19" parent="Map" instance=ExtResource("5_l5v8x")]
+position = Vector2(403, 82)
+scale = Vector2(1.2, 0.4)
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteEnd22" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(433, 82)
+rotation = -3.14159
+route_color = Color(1, 0.411765, 0.427451, 1)
+
+[node name="RouteTurn7" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(233, 35)
+scale = Vector2(1, -1)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteEnd23" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(210, 50)
+route_color = Color(0.117647, 0.509804, 0.490196, 1)
+
+[node name="RouteDiagonalSeparate2" parent="Map" instance=ExtResource("9_8xlsi")]
+position = Vector2(260, 5)
+scale = Vector2(1, -1)
+route1_color = Color(0.117647, 0.509804, 0.490196, 1)
+route2_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteTurn8" parent="Map" instance=ExtResource("6_nupqx")]
+position = Vector2(287, -25)
+rotation = 3.14159
+scale = Vector2(1, -1)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="RouteEnd24" parent="Map" instance=ExtResource("4_jpmsn")]
+position = Vector2(310, -40)
+rotation = 3.14159
+scale = Vector2(1, -1)
+route_color = Color(0.0980392, 0.396078, 0.682353, 1)
+
+[node name="Label2" type="Label" parent="Map"]
+offset_left = -99.0
+offset_top = -260.0
+offset_right = -9.0
+offset_bottom = -217.0
+text = "月見原"
+label_settings = SubResource("LabelSettings_8xlsi")
+
+[node name="Label" type="Label" parent="Map/Label2"]
+layout_mode = 0
+offset_left = -454.0
+offset_top = 246.0
+offset_right = -390.0
+offset_bottom = 269.0
+text = "朝霧野方"
+
+[node name="Label" type="Label" parent="Map/Label2/Label"]
+layout_mode = 0
+offset_left = 954.0
+offset_top = 2.0
+offset_right = 1018.0
+offset_bottom = 25.0
+text = "瑠璃浜方"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_left = -93.0
+offset_top = -26.0
+offset_right = 103.0
+offset_bottom = 33.0
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ReferenceRect"]
+layout_mode = 0
+offset_top = 237.0
+offset_right = 196.0
+offset_bottom = 276.0
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Line2D6" type="Line2D" parent="ReferenceRect"]
+position = Vector2(-264, 350)
+rotation = 3.14159
+scale = Vector2(1, -1)
+points = PackedVector2Array(-255, -123, -255, -103, -255, -113, -227, -113)
+width = 2.0
+
+[node name="Line2D5" type="Line2D" parent="ReferenceRect"]
+position = Vector2(-265, 172)
+scale = Vector2(-1, 1)
+points = PackedVector2Array(-255, -123, -255, -103, -255, -113, -227, -113)
+width = 2.0
+
+[node name="Line2D" type="Line2D" parent="ReferenceRect"]
+position = Vector2(-65, -31)
+points = PackedVector2Array(-255, -123, -255, -103, -255, -113, -227, -113)
+width = 2.0
+
+[node name="Line2D2" type="Line2D" parent="ReferenceRect"]
+position = Vector2(-64, -14)
+points = PackedVector2Array(-256, -108, -256, -89, -256, -100, -208, -100, -244, -100, -244, -75, -227, -75)
+width = 2.0
+
+[node name="Line2D3" type="Line2D" parent="ReferenceRect"]
+position = Vector2(473, 113)
+points = PackedVector2Array(-255, -123, -255, -103, -255, -113, -227, -113)
+width = 2.0
+
+[node name="Line2D4" type="Line2D" parent="ReferenceRect"]
+position = Vector2(474, 350)
+points = PackedVector2Array(-255, -123, -255, -103, -255, -113, -227, -113)
+width = 2.0
+
+[node name="Line2D7" type="Line2D" parent="ReferenceRect"]
+position = Vector2(192, 258)
+rotation = 3.14159
+scale = Vector2(1, -1)
+points = PackedVector2Array(-256, -108, -256, -89, -256, -100, -208, -100, -244, -100, -244, -75, -227, -75)
+width = 2.0
+
+[node name="RouteLights" type="Node2D" parent="."]
+
+[node name="RouteLight" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-438, -72)
+
+[node name="RouteLight2" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-377, -72)
+
+[node name="RouteLight3" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-318, -72)
+
+[node name="RouteLight4" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-235, -72)
+
+[node name="RouteLight5" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-139, -72)
+
+[node name="RouteLight6" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-415, 82)
+
+[node name="RouteLight7" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-294, 82)
+
+[node name="RouteLight8" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-193, 82)
+
+[node name="RouteLight9" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-116, 82)
+
+[node name="RouteLight10" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-307, -24)
+rotation = 1.0472
+
+[node name="RouteLight11" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-274, 33)
+rotation = 1.0472
+
+[node name="RouteLight12" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-183, 141)
+rotation = 1.0472
+
+[node name="RouteLight13" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(-116, 164)
+
+[node name="RouteLight14" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(114, -72)
+
+[node name="RouteLight15" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(190, -72)
+
+[node name="RouteLight16" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(275, -72)
+
+[node name="RouteLight17" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(361, -72)
+
+[node name="RouteLight18" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(440, -72)
+
+[node name="RouteLight19" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(121, 82)
+
+[node name="RouteLight20" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(115, 165)
+
+[node name="RouteLight21" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(204, 83)
+
+[node name="RouteLight22" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(310, 83)
+
+[node name="RouteLight23" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(394, 83)
+
+[node name="RouteLight24" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(456, 82)
+
+[node name="RouteLight25" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(331, -22)
+rotation = 2.0944
+
+[node name="RouteLight26" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(297, 34)
+rotation = 2.0944
+
+[node name="RouteLight27" parent="RouteLights" instance=ExtResource("10_5ltin")]
+position = Vector2(188, 140)
+rotation = 2.0944
+
+[node name="SignalLights" type="Node2D" parent="."]
+
+[node name="1R" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(-371, -170)
+
+[node name="2R" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(-351, -140)
+IsLine = true
+
+[node name="3R" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(-370, -115)
+IsLine = true
+
+[node name="4R" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(168, 211)
+
+[node name="6R" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(167, -26)
+
+[node name="2L" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(-145, 33)
+
+[node name="3L" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(-144, 211)
+
+[node name="5L" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(293, 132)
+
+[node name="4L" parent="SignalLights" instance=ExtResource("3_0x8cp")]
+position = Vector2(312, 157)
+IsLine = true
+
+[node name="Control" type="Control" parent="SignalLights"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = -349.0
+offset_top = -182.0
+offset_right = -309.0
+offset_bottom = -159.0
+text = "1R"
+label_settings = SubResource("LabelSettings_5ltin")
+
+[node name="Label2" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = -329.0
+offset_top = -152.0
+offset_right = -289.0
+offset_bottom = -129.0
+text = "2R"
+
+[node name="Label3" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = -347.0
+offset_top = -126.0
+offset_right = -307.0
+offset_bottom = -103.0
+text = "3R"
+
+[node name="Label4" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = -38.0
+offset_right = 228.0
+offset_bottom = -15.0
+text = "6R"
+
+[node name="Label5" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 199.0
+offset_right = 231.0
+offset_bottom = 222.0
+text = "4R"
+
+[node name="Label6" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = -185.0
+offset_top = 22.0
+offset_right = -145.0
+offset_bottom = 45.0
+text = "2L"
+
+[node name="Label7" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = -186.0
+offset_top = 199.0
+offset_right = -146.0
+offset_bottom = 222.0
+text = "3L"
+
+[node name="Label8" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 120.0
+offset_right = 290.0
+offset_bottom = 143.0
+text = "5L"
+
+[node name="Label9" type="Label" parent="SignalLights/Control"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 150.0
+offset_right = 306.0
+offset_bottom = 173.0
+text = "4L"
+
+[node name="Switches" type="Node2D" parent="."]
+
+[node name="11" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(-250, -128)
+InnerText = "11"
+Id = 11
+
+[node name="12" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(-155, -128)
+InnerText = "12"
+Id = 12
+
+[node name="13" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(116, -128)
+InnerText = "13"
+Id = 13
+
+[node name="14" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(211, -128)
+InnerText = "14"
+Id = 14
+
+[node name="1" parent="Switches" instance=ExtResource("11_ocsda")]
+position = Vector2(-483, 223)
+IsSignalSwitch = true
+IsNr = true
+
+[node name="2" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(-387, 223)
+IsSignalSwitch = true
+InnerText = "2"
+Id = 2
+
+[node name="3" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(-290, 223)
+IsSignalSwitch = true
+InnerText = "3"
+Id = 3
+
+[node name="4" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(351, 222)
+IsSignalSwitch = true
+InnerText = "4"
+Id = 4
+
+[node name="5" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(439, 222)
+IsSignalSwitch = true
+IsLn = true
+InnerText = "5"
+Id = 5
+
+[node name="6" parent="Switches" groups=["Clickables"] instance=ExtResource("11_ocsda")]
+position = Vector2(484, 222)
+IsSignalSwitch = true
+IsNr = true
+InnerText = "6"
+Id = 6
+
+[node name="MousePosition" type="Node2D" parent="."]
+
+[node name="MousePosition" type="Area2D" parent="MousePosition"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MousePosition/MousePosition"]
+shape = SubResource("RectangleShape2D_ocsda")
+
+[node name="ColorRect" type="ColorRect" parent="MousePosition/MousePosition"]
+visible = false
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[connection signal="area_entered" from="MousePosition/MousePosition" to="." method="on_area_entered"]
+[connection signal="area_exited" from="MousePosition/MousePosition" to="." method="on_area_exited"]

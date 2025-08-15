@@ -12,8 +12,12 @@ config_version=5
 
 config/name="Rensa Simulator"
 run/main_scene="uid://bg2vd2k1ougpy"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

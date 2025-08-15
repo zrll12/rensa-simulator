@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nsadwp8ecpe4"
-path="res://.godot/imported/approach_background.png-bb9d8a6aafe5a430753c3f19df0693b5.ctex"
+uid="uid://dxaf72xob2b6e"
+path="res://.godot/imported/switch_ncr.png-d7a7b04990ff2db0bb9f8c4701f446e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/approach_background.png"
-dest_files=["res://.godot/imported/approach_background.png-bb9d8a6aafe5a430753c3f19df0693b5.ctex"]
+source_file="res://assets/sprites/switch_ncr.png"
+dest_files=["res://.godot/imported/switch_ncr.png-d7a7b04990ff2db0bb9f8c4701f446e4.ctex"]
 
 [params]
 
