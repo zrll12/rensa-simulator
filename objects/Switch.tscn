@@ -26,6 +26,7 @@ scale = Vector2(0.2, 0.2)
 script = ExtResource("1_x25do")
 
 [node name="Background" type="Node2D" parent="."]
+position = Vector2(0, -35)
 
 [node name="LNR" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_4ctvt")
@@ -50,18 +51,19 @@ texture = ExtResource("4_4ctvt")
 [node name="Switch" type="Node2D" parent="."]
 
 [node name="Black" type="Sprite2D" parent="Switch"]
+position = Vector2(0, -35)
 texture = ExtResource("5_lhq8j")
 
 [node name="Red" type="Sprite2D" parent="Switch"]
 visible = false
-position = Vector2(1, 0)
+position = Vector2(1, -35)
 texture = ExtResource("6_itkyt")
 
 [node name="Label" type="Label" parent="Switch"]
 offset_left = -25.0
-offset_top = -21.0
+offset_top = -56.0
 offset_right = 32.0
-offset_bottom = 116.0
+offset_bottom = 81.0
 text = "1"
 label_settings = SubResource("LabelSettings_x25do")
 
@@ -72,6 +74,7 @@ visible = false
 polygon = PackedVector2Array(-15, -20, -80, -190, -55, -200, -15, -205, 45, -200, 70, -195, 125, -170, 145, -155, 175, -125, 200, -90, 45, 5, 55, 40, 45, 75, 10, 95, -35, 90, -60, 55, -60, 30, -50, 5, -45, -10)
 
 [node name="Tooltip" type="Node2D" parent="."]
+position = Vector2(0, -35)
 
 [node name="Background" type="Sprite2D" parent="Tooltip"]
 position = Vector2(0, -345)

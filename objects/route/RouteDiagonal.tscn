@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cya5dgcgg70i0"]
 
 [ext_resource type="Texture2D" uid="uid://d1ai0bwqwa6nh" path="res://assets/sprites/route/route_diagonal.png" id="1_l3eam"]
-[ext_resource type="Script" uid="uid://cio8bbvtyu0ek" path="res://objects/route/simple_color_replace.gd" id="1_v60ii"]
+[ext_resource type="Script" path="res://objects/route/SimpleColorReplace.cs" id="1_v60ii"]
 
 [node name="RouteDiagonal" type="Node2D"]
 script = ExtResource("1_v60ii")

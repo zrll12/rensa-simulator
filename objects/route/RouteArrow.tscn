@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs12bk8bv3um3"]
 
-[ext_resource type="Script" uid="uid://cio8bbvtyu0ek" path="res://objects/route/simple_color_replace.gd" id="1_g8145"]
+[ext_resource type="Script" path="res://objects/route/SimpleColorReplace.cs" id="1_g8145"]
 [ext_resource type="Texture2D" uid="uid://dpg22f11vpnug" path="res://assets/sprites/route/route_arrow.png" id="1_yehkt"]
 
 [node name="RouteArrow" type="Node2D"]

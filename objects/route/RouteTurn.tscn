@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmlhjehc1f3hv"]
 
-[ext_resource type="Script" uid="uid://cio8bbvtyu0ek" path="res://objects/route/simple_color_replace.gd" id="1_33d1r"]
+[ext_resource type="Script" path="res://objects/route/SimpleColorReplace.cs" id="1_33d1r"]
 [ext_resource type="Texture2D" uid="uid://bsbj7pk1lj4wo" path="res://assets/sprites/route/route_turn.png" id="1_vki1i"]
 
 [node name="RouteTurn" type="Node2D"]

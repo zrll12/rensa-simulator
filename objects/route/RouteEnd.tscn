@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciq6n2m1qsovl"]
 
 [ext_resource type="Texture2D" uid="uid://buaxvyt8ybw7i" path="res://assets/sprites/route/route_sepate.png" id="1_ingxj"]
-[ext_resource type="Script" uid="uid://m5ltowttfoja" path="res://objects/route/route_end.gd" id="1_swpu4"]
+[ext_resource type="Script" path="res://objects/route/RouteEnd.cs" id="1_swpu4"]
 [ext_resource type="Texture2D" uid="uid://cjct0sc3pr20r" path="res://assets/sprites/route/route_line.png" id="2_swpu4"]
 
 [node name="RouteEnd" type="Node2D"]

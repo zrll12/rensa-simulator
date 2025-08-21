@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfxkqnj8rbt05"]
+
+[ext_resource type="Script" uid="uid://vqvgrnx13tmm" path="res://scene/TestScene.cs" id="1_r7xqf"]
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_r7xqf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -673.0
+offset_top = -442.0
+offset_right = 721.0
+offset_bottom = 483.0
+color = Color(0.294118, 0.388235, 0.329412, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Labels" type="Node2D" parent="."]
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="RouteLights" type="Node2D" parent="."]
+
+[node name="SignalLights" type="Node2D" parent="."]
+
+[node name="Switches" type="Node2D" parent="."]
+
+[node name="ApproachSigns" type="Node2D" parent="."]

@@ -5,17 +5,52 @@ using Godot.Logging;
 namespace RensaSimulator.objects;
 
 public partial class Switch : Node2D {
-	[Export] public Boolean IsSignalSwitch;
+	private Boolean _isSignalSwitch;
+	private Boolean _isLn;
+	private Boolean _isNr;
+	private String _innerText = "1";
 
-	[Export] public Boolean IsLn;
-	[Export] public Boolean IsNr;
+	[Export]
+	public Boolean IsSignalSwitch {
+		get => _isSignalSwitch;
+		set {
+			_isSignalSwitch = value;
+			UpdateState();
+		}
+	}
 
-	[Export] public String InnerText = "1";
+	[Export]
+	public Boolean IsLn {
+		get => _isLn;
+		set {
+			_isLn = value;
+			UpdateState();
+		}
+	}
+
+	[Export]
+	public Boolean IsNr {
+		get => _isNr;
+		set {
+			_isNr = value;
+			UpdateState();
+		}
+	}
+
+	[Export]
+	public String InnerText {
+		get => _innerText;
+		set {
+			_innerText = value;
+			UpdateState();
+		}
+	}
+
 	[Export] public int Id = 1;
 
 	private int _state; // -1: Left, 0: Center, 1: Right
 
-	private static Vector2[] _allShape = [
+	private static readonly Vector2[] AllShape = [
 		new(-50, 0),
 		new(-200, -85),
 		new(-155, -145),
@@ -34,7 +69,8 @@ public partial class Switch : Node2D {
 		new(-50, 60),
 		new(-55, 35),
 	];
-	private static Vector2[] _lnShape = [
+
+	private static readonly Vector2[] LnShape = [
 		new(-50, 0),
 		new(-200, -85),
 		new(-160, -140),
@@ -51,7 +87,8 @@ public partial class Switch : Node2D {
 		new(-55, 60),
 		new(-55, 35),
 	];
-	private static Vector2[] _nrShape = [
+
+	private static readonly Vector2[] NrShape = [
 		new(-15, -20),
 		new(-80, -190),
 		new(-55, -200),
@@ -71,13 +108,15 @@ public partial class Switch : Node2D {
 		new(-60, 30),
 		new(-50, 5),
 		new(-45, -10),
-
 	];
 
-	public override void _Ready() {
+	private void UpdateState() {
 		LabelSettings labelSettings = new LabelSettings();
 		labelSettings.FontSize = 80 - (InnerText.Length - 1) * 20;
 		labelSettings.FontColor = Colors.Black;
+
+		GetNode<Label>("Switch/Label").Text = InnerText;
+		GetNode<Label>("Switch/Label").LabelSettings = labelSettings;
 
 		GetNode<Sprite2D>("Switch/Black").Visible = !IsSignalSwitch;
 		GetNode<Sprite2D>("Switch/Red").Visible = IsSignalSwitch;
@@ -87,22 +126,22 @@ public partial class Switch : Node2D {
 		GetNode<Sprite2D>("Background/LN").Visible = IsSignalSwitch && IsLn && !IsNr;
 		GetNode<Sprite2D>("Background/NR").Visible = IsSignalSwitch && !IsLn && IsNr;
 
-		GetNode<Label>("Switch/Label").Text = InnerText;
-		GetNode<Label>("Switch/Label").LabelSettings = labelSettings;
 		GetNode<Label>("Switch/Label").Position += InnerText.Length > 1
 			? new Vector2(-6 + (InnerText.Length - 1) * -2, (InnerText.Length - 1) * 13)
 			: Vector2.Zero;
 
 		GetNode<Node2D>("Tooltip").Visible = false;
-		
+
 		if (IsLn) {
-			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = _lnShape;
+			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = LnShape;
 		} else if (IsNr) {
-			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = _nrShape;
+			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = NrShape;
 		} else {
-			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = _allShape;
+			GetNode<CollisionPolygon2D>("Collision/Shape").Polygon = AllShape;
 		}
 	}
+
+	public override void _Ready() { }
 
 	public override void _Process(double delta) { }
 
@@ -140,7 +179,6 @@ public partial class Switch : Node2D {
 	private void process_turn() {
 		GodotLogger.LogInfo($"Switch {Id} turned to state {_state}");
 		GetNode<Node2D>("Switch").RotationDegrees = 50 * _state;
-		// GetNode<Node2D>("Switch").Transform = GetNode<Node2D>("Switch").Transform.Rotated((float.Pi / 3f - 0.2f) * _state);
 	}
 
 	private void generate_tooltip() {
