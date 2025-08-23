@@ -5,11 +5,12 @@ namespace RensaSimulator.objects.ui;
 
 public partial class SceneEntryCard : Control {
 	[Signal]
-	public delegate void LoadSceneEventHandler(Scene scene);
+	public delegate void LoadSceneEventHandler(Scene scene, string folderName);
 
 	[Signal]
 	public delegate void OpenSceneDetailsEventHandler(Scene scene);
 
+	public string FolderName;
 
 	private Scene _scene;
 
@@ -31,7 +32,7 @@ public partial class SceneEntryCard : Control {
 	}
 
 	private void OnLoadButtonPressed() {
-		EmitSignal(SignalName.LoadScene, Scene);
+		EmitSignal(SignalName.LoadScene, Scene, FolderName);
 	}
 
 	private void OnOpenDetailsButtonPressed() {

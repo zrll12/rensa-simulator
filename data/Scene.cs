@@ -31,7 +31,7 @@ public partial class Scene : GodotObject {
     }
 }
 
-public class TimeTableEntry {
+public partial class TimeTableEntry : GodotObject {
     public string TimeTableName { get; init; } = "UntitledTimeTable";
     public string TimeTableFilePath { get; init; } = "TimeTable.json";
 }

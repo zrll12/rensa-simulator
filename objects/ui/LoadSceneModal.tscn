@@ -58,18 +58,22 @@ offset_right = 506.0
 offset_bottom = 90.0
 text = "Please select your timetable"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 597.0
-offset_top = 356.0
-offset_right = 643.0
-offset_bottom = 387.0
-text = "Load"
-
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
 offset_left = 669.0
-offset_top = 356.0
+offset_top = 362.0
 offset_right = 729.0
-offset_bottom = 387.0
+offset_bottom = 393.0
 text = "Cancel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 105.0
+offset_right = 750.0
+offset_bottom = 345.0
+
+[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="Button2" to="." method="OnCancel"]

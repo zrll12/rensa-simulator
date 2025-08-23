@@ -48,28 +48,25 @@ public partial class SceneSelectScreen : Node2D {
 
 	private void OnLoadFiles() {
 		Directory.CreateDirectory(SelectedFolderPath);
-		var dir = Directory.EnumerateDirectories(SelectedFolderPath)
-			.Select(path => {
-				var sceneFile = Scene.LoadSceneInfo(path + "/scene.json");
-				return sceneFile;
-			}).ToArray();
+		var dir = Directory.EnumerateDirectories(SelectedFolderPath).ToArray();
 		
 		var container = GetNode<VBoxContainer>("ScrollContainer/EntriesContainer");
 		foreach (var node in container.GetChildren()) {
 			node.QueueFree();
 		}
 
-		foreach (var sceneInfo in dir) {
+		foreach (var path in dir) {
 			var pack = GD.Load<PackedScene>("res://objects/ui/SceneEntryCard.tscn");
 			var entry = pack.Instantiate<SceneEntryCard>();
 			container.AddChild(entry);
 			
-			entry.Scene = sceneInfo;
+			entry.Scene = Scene.LoadSceneInfo(path + "/scene.json");
+			entry.FolderName = path;
 			entry.LoadScene += OnLoadScene;
 		}
 	}
 	
-	private void OnLoadScene(Scene scene) {
+	private void OnLoadScene(Scene scene, string folderName) {
 		if (_modalOpened) return;
 		_modalOpened = true;
 		var cover = GetNode<ColorRect>("ModalCover");
@@ -79,7 +76,21 @@ public partial class SceneSelectScreen : Node2D {
 
 		var modal = GD.Load<PackedScene>("res://objects/ui/LoadSceneModal.tscn").Instantiate<LoadSceneModal>();
 		modal.Scene = scene;
+		modal.CancelLoad += OnCancelLoad;
+		modal.BaseFolder = folderName + '/';
 		container.AddChild(modal);
+	}
+
+	private void OnCancelLoad() {
+		if (!_modalOpened) return;
+		_modalOpened = false;
+		
+		var cover = GetNode<ColorRect>("ModalCover");
+		cover.Visible = false;
+		var container = GetNode<VBoxContainer>("ModalCover/Container");
+		foreach (Node child in container.GetChildren()) {
+			child.QueueFree();
+		}
 	}
 
 	private void OnCancel() {
