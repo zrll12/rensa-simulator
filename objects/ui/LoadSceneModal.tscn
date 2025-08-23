@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqs3o3dc4o2bp"]
+
+[ext_resource type="Script" uid="uid://bieti2ibow52g" path="res://objects/ui/LoadSceneModal.cs" id="1_atvan"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hkb8f"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_atvan"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_k6i7a"]
+font_size = 20
+
+[node name="LoadSceneModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_atvan")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 803.0
+offset_bottom = 413.0
+color = Color(0.242966, 0.242966, 0.242966, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 12.0
+offset_right = 729.0
+offset_bottom = 65.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Load"
+label_settings = SubResource("LabelSettings_hkb8f")
+
+[node name="SceneName" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Untitled Scene"
+label_settings = SubResource("LabelSettings_atvan")
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "?"
+label_settings = SubResource("LabelSettings_k6i7a")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 67.0
+offset_right = 506.0
+offset_bottom = 90.0
+text = "Please select your timetable"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 597.0
+offset_top = 356.0
+offset_right = 643.0
+offset_bottom = 387.0
+text = "Load"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 356.0
+offset_right = 729.0
+offset_bottom = 387.0
+text = "Cancel"

@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://crcuyrs87oioy"]
+
+[ext_resource type="Script" uid="uid://qa041se5w7ul" path="res://objects/ui/SceneEntryCard.cs" id="1_q15t7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y37kq"]
+font_size = 25
+
+[node name="SceneEntryCard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -557.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q15t7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1152.0
+offset_bottom = 91.0
+color = Color(0, 0, 0, 0.239216)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 1128.0
+offset_bottom = 90.0
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "MoreInfo"
+
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Load"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Untitles Scene"
+label_settings = SubResource("LabelSettings_y37kq")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Author" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Unknown"
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "•"
+
+[node name="Version" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "v1.0.0"
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "•"
+
+[node name="Description" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "No description provided."
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button" to="." method="OnOpenDetailsButtonPressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button2" to="." method="OnLoadButtonPressed"]

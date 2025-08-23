@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid="uid://wpg22sx1hcx2"]
+
+[ext_resource type="Script" uid="uid://b5o1q5p87xnke" path="res://scene/SceneSelectScreen.cs" id="1_5hp76"]
+[ext_resource type="PackedScene" uid="uid://crcuyrs87oioy" path="res://objects/ui/SceneEntryCard.tscn" id="2_5rlno"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5rlno"]
+font_size = 20
+
+[node name="SceneSelectScreen" type="Node2D"]
+script = ExtResource("1_5hp76")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -669.0
+offset_top = -473.0
+offset_right = 802.0
+offset_bottom = 536.0
+color = Color(0.294118, 0.388235, 0.329412, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -460.0
+offset_top = -283.0
+offset_right = -337.0
+offset_bottom = -255.0
+text = "Scene Folder"
+label_settings = SubResource("LabelSettings_5rlno")
+
+[node name="Select" type="Button" parent="."]
+offset_left = 306.0
+offset_top = -286.0
+offset_right = 360.0
+offset_bottom = -255.0
+text = "Select"
+
+[node name="Default" type="Button" parent="."]
+offset_left = 367.0
+offset_top = -286.0
+offset_right = 432.0
+offset_bottom = -255.0
+text = "Default"
+
+[node name="Load" type="Button" parent="."]
+offset_left = 439.0
+offset_top = -286.0
+offset_right = 485.0
+offset_bottom = -255.0
+text = "Load"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = -327.0
+offset_top = -285.0
+offset_right = 291.0
+offset_bottom = -254.0
+placeholder_text = "Input Scene Path"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = -475.0
+offset_top = -192.0
+offset_right = 500.0
+offset_bottom = 234.0
+
+[node name="EntriesContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="SceneEntryCard" parent="ScrollContainer/EntriesContainer" instance=ExtResource("2_5rlno")]
+layout_mode = 2
+
+[node name="SceneEntryCard2" parent="ScrollContainer/EntriesContainer" instance=ExtResource("2_5rlno")]
+layout_mode = 2
+
+[node name="ModalCover" type="ColorRect" parent="."]
+visible = false
+offset_left = -612.0
+offset_top = -357.0
+offset_right = 619.0
+offset_bottom = 368.0
+color = Color(0, 0, 0, 0.380392)
+
+[node name="Container" type="VBoxContainer" parent="ModalCover"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.171
+anchor_top = 0.225
+anchor_right = 0.82
+anchor_bottom = 0.794
+offset_left = 0.498993
+offset_top = -0.125
+offset_right = 0.579956
+offset_bottom = 0.349976
+
+[node name="Button" type="Button" parent="."]
+offset_left = 419.0
+offset_top = 256.0
+offset_right = 479.0
+offset_bottom = 287.0
+text = "Cancel"
+
+[connection signal="pressed" from="Select" to="." method="OnSelectFolder"]
+[connection signal="pressed" from="Default" to="." method="OnResetDefault"]
+[connection signal="pressed" from="Button" to="." method="OnCancel"]
