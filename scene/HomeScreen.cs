@@ -1,4 +1,5 @@
 using Godot;
+using RensaSimulator.data.scene;
 
 namespace RensaSimulator.scene;
 

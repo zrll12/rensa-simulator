@@ -1,6 +1,11 @@
 using System.IO;
 using Godot;
 using RensaSimulator.data;
+using RensaSimulator.data.game;
+using RensaSimulator.data.scene;
+using RensaSimulator.scene;
+using Scene = RensaSimulator.data.scene.Scene;
+using TimeTableEntry = RensaSimulator.data.scene.TimeTableEntry;
 
 namespace RensaSimulator.objects.ui;
 
@@ -45,8 +50,11 @@ public partial class LoadSceneModal : Control {
 	}
 
 	private void OnLoadTimeTable(TimeTableEntry entry) {
-		var file = File.ReadAllText(BaseFolder + entry.TimeTableFilePath);
-		GD.Print(file);
+		GameManager.CurrentMap = new Map(BaseFolder + _scene.MapFilePath);
+		GameManager.CurrentRouteDto = new RouteDto(BaseFolder + _scene.RouteFilePath);
+		GameManager.CurrentTimeTable = new TimeTable(BaseFolder + entry.TimeTableFilePath);
+
+		GetTree().ChangeSceneToPacked(GD.Load<PackedScene>("res://scene/GameScene.tscn"));
 	}
 	
 	public override void _Ready() { }

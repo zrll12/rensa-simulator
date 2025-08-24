@@ -1,5 +1,6 @@
 using Godot;
 using RensaSimulator.data;
+using TimeTableEntry = RensaSimulator.data.scene.TimeTableEntry;
 
 namespace RensaSimulator.objects.ui;
 

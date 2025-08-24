@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Godot;
 
-namespace RensaSimulator.data;
+namespace RensaSimulator.data.scene;
 
 public partial class Scene : GodotObject {
     public string SceneName { get; init; } = "UntitledScene";

@@ -1,5 +1,6 @@
 using Godot;
 using RensaSimulator.data;
+using Scene = RensaSimulator.data.scene.Scene;
 
 namespace RensaSimulator.objects.ui;
 

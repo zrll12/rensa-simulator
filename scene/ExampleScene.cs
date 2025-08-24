@@ -6,6 +6,7 @@ using Godot;
 using Godot.Logging;
 using RensaSimulator.data;
 using RensaSimulator.data.converter;
+using RensaSimulator.data.scene;
 using Switch = RensaSimulator.objects.Switch;
 
 namespace RensaSimulator.scene;

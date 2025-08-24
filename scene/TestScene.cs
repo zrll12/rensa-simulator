@@ -8,6 +8,7 @@ using Godot;
 using Godot.Logging;
 using RensaSimulator.data;
 using RensaSimulator.data.converter;
+using RensaSimulator.data.scene;
 using RensaSimulator.objects;
 using RensaSimulator.objects.route;
 using Label = Godot.Label;

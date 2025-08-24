@@ -3,6 +3,7 @@ using System.Linq;
 using Godot;
 using RensaSimulator.data;
 using RensaSimulator.objects.ui;
+using Scene = RensaSimulator.data.scene.Scene;
 
 namespace RensaSimulator.scene;
 
