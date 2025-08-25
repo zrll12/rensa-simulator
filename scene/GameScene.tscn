@@ -42,5 +42,13 @@ offset_bottom = 10.0
 
 [node name="ApproachSigns" type="Node2D" parent="."]
 
+[node name="Button" type="Button" parent="."]
+offset_left = 467.0
+offset_top = -316.0
+offset_right = 565.0
+offset_bottom = -285.0
+text = "Print Trains"
+
 [connection signal="area_entered" from="MousePosition/MousePosition" to="." method="OnMouseAreaEntered"]
 [connection signal="area_exited" from="MousePosition/MousePosition" to="." method="OnMouseAreaExited"]
+[connection signal="pressed" from="Button" to="." method="OnGetTrains"]

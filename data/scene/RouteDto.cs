@@ -86,5 +86,5 @@ public class RoutePosition {
 public class EntryExitPoint {
     public int Id { get; init; }
     public int Route { get; init; }
-    public float Point { get; init; }
+    public float Position { get; init; }
 }

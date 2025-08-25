@@ -55,7 +55,7 @@ public class EntryExitPoint {
 public class RouteManager {
     Dictionary<string, Section> Sections = new Dictionary<string, Section>();
     Dictionary<string, Turnout> Turnouts = new Dictionary<string, Turnout>();
-    // Dictionary<int>
+    Dictionary<int, RoutePosition> EntryExitPoints = new Dictionary<int, RoutePosition>();
 
     public RouteManager(RouteDto routeDto) {
         // Add sections without upstream/downstream references
@@ -134,6 +134,11 @@ public class RouteManager {
             //                    $"{(Turnouts[routeDtoTurnout.Id].IsNeutralPositionTurnout ? "[Turnout]" : "")}, " +
             //                    $"ReversePositionSectionId: {(Turnouts[routeDtoTurnout.Id].ReversePositionSectionId ?? "None")} " +
             //                    $"{(Turnouts[routeDtoTurnout.Id].IsReversePositionTurnout ? "[Turnout]" : "")}");
+            
+            // Add Entry/Exit points
+            foreach (var entryExit in routeDto.EntryExitPoints) {
+                EntryExitPoints[entryExit.Id] = new RoutePosition(entryExit.Route, entryExit.Position);
+            }
         }
 
         // Then set upstream/downstream references
@@ -191,9 +196,9 @@ public class RouteManager {
             }
             
             // Display linked section info for debugging
-            // GodotLogger.LogInfo($"Section {section.Id} (Route {section.Route}, {section.DownEndPosition}m to {section.UpEndPosition}m): " +
-            //                    $"Upstream: {(section.UpSideSectionId ?? "None")} {(section.IsUpSideTurnout ? "[Turnout]" : "")}, " +
-            //                    $"Downstream: {(section.DownSideSectionId ?? "None")} {(section.IsDownSideTurnout ? "[Turnout]" : "")}");
+            GodotLogger.LogInfo($"Section {section.Id} (Route {section.Route}, {section.DownEndPosition}m to {section.UpEndPosition}m): " +
+                               $"Upstream: {(section.UpSideSectionId ?? "None")} {(section.IsUpSideTurnout ? "[Turnout]" : "")}, " +
+                               $"Downstream: {(section.DownSideSectionId ?? "None")} {(section.IsDownSideTurnout ? "[Turnout]" : "")}");
         }
     }
 
@@ -227,6 +232,106 @@ public class RouteManager {
         }
 
         return (resultSectionId, resultDirection);
+    }
+
+    public (RoutePositionWithSection, bool) MoveAlong(string trainId, RoutePositionWithSection position, float distance) {
+        var distanceLeft = distance;
+        var lastSectionId = position.SectionId;
+        var currentPosition = position;
+        var isOnTurnout = false;
+        var isActive = true;
+        var isUpstream = distance > 0;
+
+        while (distanceLeft != 0 || isOnTurnout) {
+            if (isOnTurnout) {
+                var turnout = Turnouts[currentPosition.SectionId];
+                var nextSectionId = "";
+                var isNextSectionTurnout = false;
+                if (turnout.StaticPositionSectionId == lastSectionId) {
+                    nextSectionId = turnout.IsOnReversePosition ? turnout.ReversePositionSectionId : turnout.NeutralPositionSectionId;
+                    isNextSectionTurnout = turnout.IsOnReversePosition
+                        ? turnout.IsReversePositionTurnout
+                        : turnout.IsNeutralPositionTurnout;
+                }
+                if (turnout.NeutralPositionSectionId == lastSectionId) {
+                    if (turnout.IsOnReversePosition) {
+                        isActive = false;
+                        GodotLogger.LogInfo($"Train {trainId} moves into turnout {lastSectionId} that has been set to wrong direction.");
+                        break;
+                    }
+                    nextSectionId = turnout.StaticPositionSectionId;
+                    isNextSectionTurnout = turnout.IsStaticPositionTurnout;
+                }
+                if (turnout.ReversePositionSectionId == lastSectionId) {
+                    if (!turnout.IsOnReversePosition) {
+                        isActive = false;
+                        GodotLogger.LogInfo($"Train {trainId} moves into turnout {lastSectionId} that has been set to wrong direction.");
+                        break;
+                    }
+                    nextSectionId = turnout.StaticPositionSectionId;
+                    isNextSectionTurnout = turnout.IsStaticPositionTurnout;
+                }
+                var positionInNextSection = isUpstream
+                    ? GetSectionById(nextSectionId).DownEndPosition
+                    : GetSectionById(nextSectionId).UpEndPosition;
+                
+                currentPosition.SectionId = nextSectionId;
+                currentPosition.Position = positionInNextSection;
+                isOnTurnout = isNextSectionTurnout;
+                GodotLogger.LogInfo($"Train {trainId} moved through turnout {lastSectionId} to section {currentPosition.SectionId} at position {currentPosition.Position}m");
+                continue;
+            }
+            
+            var currentSection = GetSectionById(currentPosition.SectionId);
+            if (currentSection == null) {
+                GodotLogger.LogError($"Train {trainId} is on an invalid section {currentPosition.SectionId}");
+                isActive = false;
+                break;
+            }
+
+            var distanceToEnd = 0F;
+            if (distanceLeft > 0) {
+                // Upstream movement
+                distanceToEnd = currentSection.UpEndPosition - currentPosition.Position;
+            } else if (distanceLeft < 0) {
+                // Downstream movement
+                distanceToEnd = currentSection.DownEndPosition - currentPosition.Position;
+            }
+
+            if (Math.Abs(distanceToEnd) > Math.Abs(distanceLeft)) {
+                // Move within the current section
+                currentPosition.Position += distanceLeft;
+                distanceLeft = 0;
+            } else {
+                // Move to the next section
+                var nextSectionId =
+                    distanceLeft > 0 ? currentSection.UpSideSectionId : currentSection.DownSideSectionId;
+                isOnTurnout = distanceLeft > 0 ? currentSection.IsUpSideTurnout : currentSection.IsDownSideTurnout;
+                lastSectionId = currentSection.Id;
+                distanceLeft -= distanceToEnd;
+                currentPosition.Position = distanceLeft > 0 ? currentSection.UpEndPosition : currentSection.DownEndPosition;
+                currentPosition.SectionId = nextSectionId;
+                GodotLogger.LogInfo($"Train {trainId} moved to section {currentPosition.SectionId} at position {currentPosition.Position}m");
+                
+                if (nextSectionId == null) {
+                    // Reached the end of the route
+                    GodotLogger.LogInfo(
+                        $"Train {trainId} has reached the end of the route at section {currentSection.Id}");
+                    isActive = false;
+                    break;
+                }
+            }
+        }
+
+        return (currentPosition, isActive);
+    }
+    
+    public Section GetSectionById(string id) {
+        return Sections.ContainsKey(id) ? Sections[id] : null;
+    }
+    
+    public RoutePosition GetEntryExitPoint(int id) {
+        return EntryExitPoints.ContainsKey(id) ? EntryExitPoints[id] : null;
     }
 
     public enum SearchDirection {

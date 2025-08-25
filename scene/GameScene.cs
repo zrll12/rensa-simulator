@@ -117,4 +117,8 @@ public partial class GameScene : Node2D {
 				break;
 		}
 	}
+
+	private void OnGetTrains() {
+		GameManager.TrainManager.PrintTrains();
+	}
 }
