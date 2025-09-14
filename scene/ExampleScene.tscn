@@ -523,101 +523,117 @@ text = "14ｲ"
 
 [node name="RouteLight" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-438, -72)
-Id = 1
+Id = "1"
 
 [node name="RouteLight2" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-377, -72)
-Id = 2
+Id = "2"
 
 [node name="RouteLight3" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-318, -72)
-Id = 3
+Id = "3"
 
 [node name="RouteLight4" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-235, -72)
-Id = 4
+Id = "4"
 
 [node name="RouteLight5" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-139, -72)
-Id = 4
+Id = "4"
 
 [node name="RouteLight6" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-415, 82)
+Id = "7"
 
 [node name="RouteLight7" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-294, 82)
+Id = "8"
 
 [node name="RouteLight8" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-193, 82)
+Id = "9"
 
 [node name="RouteLight9" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-116, 82)
+Id = "10"
 
 [node name="RouteLight10" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-307, -24)
 rotation = 1.0472
-Id = 3
+Id = "18"
 
 [node name="RouteLight11" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-274, 33)
 rotation = 1.0472
+Id = "18"
 
 [node name="RouteLight12" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-183, 141)
 rotation = 1.0472
+Id = "15"
 
 [node name="RouteLight13" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(-116, 164)
+Id = "16"
 
 [node name="RouteLight14" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(114, -72)
-Id = 4
+Id = "4"
 
 [node name="RouteLight15" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(190, -72)
-Id = 4
+Id = "4"
 
 [node name="RouteLight16" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(275, -72)
-Id = 5
+Id = "5"
 
 [node name="RouteLight17" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(361, -72)
-Id = 5
+Id = "5"
 
 [node name="RouteLight18" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(440, -72)
-Id = 6
+Id = "6"
 
 [node name="RouteLight19" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(121, 82)
+Id = "10"
 
 [node name="RouteLight20" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(115, 165)
+Id = "16"
 
 [node name="RouteLight21" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(204, 83)
+Id = "11"
 
 [node name="RouteLight22" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(310, 83)
+Id = "12"
 
 [node name="RouteLight23" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(394, 83)
+Id = "13"
 
 [node name="RouteLight24" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(456, 82)
+Id = "14"
 
 [node name="RouteLight25" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(331, -22)
 rotation = 2.0944
+Id = "19"
 
 [node name="RouteLight26" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(297, 34)
 rotation = 2.0944
+Id = "19"
 
 [node name="RouteLight27" parent="RouteLights" instance=ExtResource("8_5m3ec")]
 position = Vector2(188, 140)
 rotation = 2.0944
+Id = "17"
 
 [node name="SignalLights" type="Node2D" parent="."]
 

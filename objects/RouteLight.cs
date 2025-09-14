@@ -1,14 +1,41 @@
 using System.Text.Json.Serialization;
 using Godot;
+using RensaSimulator.events;
 
 namespace RensaSimulator.objects;
 
 public partial class RouteLight : Node2D {
-	[Export] public int Id;
+	[Export] public string Id;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready() { }
+	public override void _Ready() {
+		EventManager.Instance.Subscribe<TrainMoveInEvent>(_on_train_entered);
+	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) { }
+	
+	public void TurnYellow() {
+		GetNode<Sprite2D>("Yellow").Visible = true;
+		GetNode<Sprite2D>("Red").Visible = false;
+		GetNode<Sprite2D>("Off").Visible = false;
+	}
+	
+	public void TurnRed() {
+		GetNode<Sprite2D>("Red").Visible = true;
+		GetNode<Sprite2D>("Yellow").Visible = false;
+		GetNode<Sprite2D>("Off").Visible = false;
+	}
+	
+	public void TurnOff() {
+		GetNode<Sprite2D>("Yellow").Visible = false;
+		GetNode<Sprite2D>("Red").Visible = false;
+		GetNode<Sprite2D>("Off").Visible = true;
+	}
+
+	private void _on_train_entered(TrainMoveInEvent e) {
+		if (e.SectionId != Id) {
+			return;
+		}
+		
+		TurnRed();
+	}
 }

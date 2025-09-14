@@ -14,7 +14,8 @@ public class Train {
     public float Acceleration { get; init; }
     public float Braking { get; init; }
 
-    public RoutePositionWithSection Position { get; set; }
+    public RoutePositionWithSection HeadPosition { get; set; }
+    public RoutePositionWithSection? TailPosition { get; set; }
     public float Speed { get; set; }
     public bool IsDownward { get; set; }
 
@@ -22,7 +23,7 @@ public class Train {
         if (!Active) return;
 
         float acceleration = 0;
-        var speedLimit = GameManager.RouteManager.GetSectionById(Position.SectionId).SpeedLimit;
+        var speedLimit = GameManager.RouteManager.GetSectionById(HeadPosition.SectionId).SpeedLimit;
         if (Speed < speedLimit - 2.0) {
             acceleration = Acceleration;
         } else if (Speed > speedLimit - 1.5) {
@@ -38,8 +39,8 @@ public class Train {
             distance = -distance;
         }
 
-        var moveResult = GameManager.RouteManager.MoveAlong(Id, Position, distance);
-        Position = moveResult.Item1;
+        var moveResult = GameManager.RouteManager.MoveAlong(Id, HeadPosition, distance);
+        HeadPosition = moveResult.Item1;
         Active = moveResult.Item2;
 
         // Log current position for debugging
@@ -73,7 +74,7 @@ public class TrainManager {
                     : RouteManager.SearchDirection.Upstream;
 
                 nextTrain.Active = true;
-                nextTrain.Position = new RoutePositionWithSection {
+                nextTrain.HeadPosition = new RoutePositionWithSection {
                     Route = Position.Route,
                     Position = Position.Position,
                     SectionId = GameManager.RouteManager.GetSectionIdOfPosition(Position, Direction).Item1
@@ -96,7 +97,7 @@ public class TrainManager {
     public void PrintTrains() {
         foreach (var train in Trains.Values) {
             GodotLogger.LogInfo(
-                $"Train {train.Id}: Active={train.Active}, Position=({train.Position?.Route}, {train.Position?.Position}), Speed={train.Speed}, IsDownward={train.IsDownward}");
+                $"Train {train.Id}: Active={train.Active}, Position=({train.HeadPosition?.Route}, {train.HeadPosition?.Position}), Speed={train.Speed}, IsDownward={train.IsDownward}");
         }
     }
 }

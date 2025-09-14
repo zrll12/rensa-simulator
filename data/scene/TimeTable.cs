@@ -63,7 +63,7 @@ public class TrainDetail {
             Active = false,
             Acceleration = this.Acceleration,
             Braking = this.Braking,
-            Position = null,
+            HeadPosition = null,
             Speed = 0f,
             IsDownward = this.IsDownward
         };

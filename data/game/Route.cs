@@ -4,6 +4,7 @@ using System.Linq;
 using Godot;
 using Godot.Logging;
 using RensaSimulator.data.scene;
+using RensaSimulator.events;
 
 namespace RensaSimulator.data.game;
 
@@ -279,6 +280,10 @@ public class RouteManager {
                 currentPosition.Position = positionInNextSection;
                 isOnTurnout = isNextSectionTurnout;
                 GodotLogger.LogInfo($"Train {trainId} moved through turnout {lastSectionId} to section {currentPosition.SectionId} at position {currentPosition.Position}m");
+                
+                var moveInEvent = new TrainMoveInEvent(trainId, currentPosition.SectionId);
+                EventManager.Instance.Publish(moveInEvent);
+                
                 continue;
             }
             
@@ -289,14 +294,11 @@ public class RouteManager {
                 break;
             }
 
-            var distanceToEnd = 0F;
-            if (distanceLeft > 0) {
-                // Upstream movement
-                distanceToEnd = currentSection.UpEndPosition - currentPosition.Position;
-            } else if (distanceLeft < 0) {
-                // Downstream movement
-                distanceToEnd = currentSection.DownEndPosition - currentPosition.Position;
-            }
+            var distanceToEnd = distanceLeft switch {
+                > 0 => currentSection.UpEndPosition - currentPosition.Position,
+                < 0 => currentSection.DownEndPosition - currentPosition.Position,
+                _ => 0F
+            };
 
             if (Math.Abs(distanceToEnd) > Math.Abs(distanceLeft)) {
                 // Move within the current section
@@ -312,6 +314,9 @@ public class RouteManager {
                 currentPosition.Position = distanceLeft > 0 ? currentSection.UpEndPosition : currentSection.DownEndPosition;
                 currentPosition.SectionId = nextSectionId;
                 GodotLogger.LogInfo($"Train {trainId} moved to section {currentPosition.SectionId} at position {currentPosition.Position}m");
+                
+                var moveInEvent = new TrainMoveInEvent(trainId, currentPosition.SectionId);
+                EventManager.Instance.Publish(moveInEvent);
                 
                 if (nextSectionId == null) {
                     // Reached the end of the route

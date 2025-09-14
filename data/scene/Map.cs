@@ -305,7 +305,7 @@ public class ApproachSignDto {
 
 public class RouteLightDto {
     public Vector2 Position { get; init; } = Vector2.Zero;
-    public int Id { get; init; } = 0;
+    public string Id { get; init; } = "0";
     public float Rotation { get; init; } = 0.0f;
     
     public void ApplyTo(RouteLight light) {
