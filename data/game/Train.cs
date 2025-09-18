@@ -6,7 +6,7 @@ using RensaSimulator.data.scene;
 namespace RensaSimulator.data.game;
 
 public class Train {
-    public string Id { get; init; }
+    public required string Id { get; init; }
     public int EntryPoint { get; init; }
     public float EntryTime { get; init; }
     public bool Active { get; set; }
@@ -14,7 +14,7 @@ public class Train {
     public float Acceleration { get; init; }
     public float Braking { get; init; }
 
-    public RoutePositionWithSection HeadPosition { get; set; }
+    public required RoutePositionWithSection HeadPosition { get; set; }
     public RoutePositionWithSection? TailPosition { get; set; }
     public float Speed { get; set; }
     public bool IsDownward { get; set; }
@@ -23,7 +23,7 @@ public class Train {
         if (!Active) return;
 
         float acceleration = 0;
-        var speedLimit = GameManager.RouteManager.GetSectionById(HeadPosition.SectionId).SpeedLimit;
+        var speedLimit = GameManager.RouteManager.GetSectionById(HeadPosition.SectionId)!.SpeedLimit;
         if (Speed < speedLimit - 2.0) {
             acceleration = Acceleration;
         } else if (Speed > speedLimit - 1.5) {
@@ -68,18 +68,7 @@ public class TrainManager {
         if (_spawnedIndex < Trains.Count) {
             var nextTrain = Trains.ElementAt(_spawnedIndex).Value;
             if (nextTrain.EntryTime >= oldTime && nextTrain.EntryTime < newTime) {
-                var Position = GameManager.RouteManager.GetEntryExitPoint(nextTrain.EntryPoint);
-                var Direction = nextTrain.IsDownward
-                    ? RouteManager.SearchDirection.Downstream
-                    : RouteManager.SearchDirection.Upstream;
-
                 nextTrain.Active = true;
-                nextTrain.HeadPosition = new RoutePositionWithSection {
-                    Route = Position.Route,
-                    Position = Position.Position,
-                    SectionId = GameManager.RouteManager.GetSectionIdOfPosition(Position, Direction).Item1
-                };
-
                 _spawnedIndex++;
 
                 GodotLogger.LogInfo($"Train {nextTrain.Id} activated at time {nextTrain.EntryTime}");
@@ -87,17 +76,15 @@ public class TrainManager {
         }
 
         // Tick all active trains
-        foreach (var train in Trains.Values) {
-            if (train.Active) {
-                train.Tick(deltaTime);
-            }
+        foreach (var train in Trains.Values.Where(train => train.Active)) {
+            train.Tick(deltaTime);
         }
     }
 
     public void PrintTrains() {
         foreach (var train in Trains.Values) {
             GodotLogger.LogInfo(
-                $"Train {train.Id}: Active={train.Active}, Position=({train.HeadPosition?.Route}, {train.HeadPosition?.Position}), Speed={train.Speed}, IsDownward={train.IsDownward}");
+                $"Train {train.Id}: Active={train.Active}, Position=({train.HeadPosition.Route}, {train.HeadPosition.Position}), Speed={train.Speed}, IsDownward={train.IsDownward}");
         }
     }
 }

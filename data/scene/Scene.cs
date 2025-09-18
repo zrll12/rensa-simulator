@@ -14,7 +14,7 @@ public partial class Scene : GodotObject {
     public string RouteFilePath { get; init; } = "";
     public TimeTableEntry[] TimeTables { get; init; }
     
-    public static Scene LoadSceneInfo(string filePath) {
+    public static Scene? LoadSceneInfo(string filePath) {
         if (!File.Exists(filePath)) {
             GD.PrintErr($"Scene file not found: {filePath}");
             return null;

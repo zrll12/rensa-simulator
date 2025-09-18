@@ -1,15 +1,14 @@
 using System.IO;
 using System.Linq;
 using Godot;
-using RensaSimulator.data;
 using RensaSimulator.objects.ui;
 using Scene = RensaSimulator.data.scene.Scene;
 
 namespace RensaSimulator.scene;
 
 public partial class SceneSelectScreen : Node2D {
-	private string _selectedFolderPath;
-	private bool _modalOpened = false;
+	private string _selectedFolderPath = "";
+	private bool _modalOpened;
 
 	private string SelectedFolderPath {
 		get => _selectedFolderPath;
@@ -61,7 +60,7 @@ public partial class SceneSelectScreen : Node2D {
 			var entry = pack.Instantiate<SceneEntryCard>();
 			container.AddChild(entry);
 			
-			entry.Scene = Scene.LoadSceneInfo(path + "/scene.json");
+			entry.Scene = Scene.LoadSceneInfo(path + "/scene.json")!;
 			entry.FolderName = path;
 			entry.LoadScene += OnLoadScene;
 		}

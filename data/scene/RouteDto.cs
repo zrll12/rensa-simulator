@@ -12,9 +12,17 @@ public class RouteDto {
     public SectionDto[] Sections { get; init; }
     public TurnoutDto[] Turnouts { get; init; }
     public EntryExitPoint[] EntryExitPoints { get; init; }
-    
-    public RouteDto() {}
+
+    public RouteDto() {
+        Sections = [];
+        Turnouts = [];
+        EntryExitPoints = [];
+    }
+
     public RouteDto(string filePath) {
+        Sections = [];
+        Turnouts = [];
+        EntryExitPoints = [];
         try {
             if (!File.Exists(filePath)) {
                 GD.PrintErr($"File not found: {filePath}");
@@ -29,8 +37,13 @@ public class RouteDto {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
             options.Converters.Add(new Vector2JsonConverter());
-		    
+
             var deserialize = JsonSerializer.Deserialize<RouteDto>(jsonContent, options);
+            if (deserialize == null) {
+                GodotLogger.LogError("Failed to deserialize route data.");
+                return;
+            }
+
             Sections = deserialize.Sections;
             Turnouts = deserialize.Turnouts;
             EntryExitPoints = deserialize.EntryExitPoints;
@@ -42,7 +55,7 @@ public class RouteDto {
             GodotLogger.LogError(ex.StackTrace);
         }
     }
-    
+
     void DisplayRouteInfo() {
         GodotLogger.LogInfo($"{Sections.Length} Sections");
         GodotLogger.LogInfo($"{Turnouts.Length} Turnouts");
@@ -51,8 +64,8 @@ public class RouteDto {
 }
 
 public class SectionDto {
-    public string Id { get; init; }
-    
+    public required string Id { get; init; }
+
     public int Route { get; init; }
     public float StartPosition { get; init; }
     public float EndPosition { get; init; }
@@ -61,7 +74,7 @@ public class SectionDto {
 }
 
 public class TurnoutDto {
-    public string Id { get; init; }
+    public required string Id { get; init; }
     public int SwitchId { get; init; }
     public RoutePosition StaticPosition { get; init; }
     public RoutePosition NeutralPosition { get; init; }
@@ -72,9 +85,13 @@ public class RoutePosition {
     public int Route { get; set; }
     public float Position { get; set; }
 
-    public override bool Equals(object obj) {
-        if(obj is not RoutePosition other) return base.Equals(obj);
+    public override bool Equals(object? obj) {
+        if (obj is not RoutePosition other) return false;
         return this.Route == other.Route && Math.Abs(this.Position - other.Position) < 0.01f;
+    }
+
+    public override int GetHashCode() {
+        return 0;
     }
 
     public RoutePosition(int route, float position) {

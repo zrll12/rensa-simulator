@@ -1,12 +1,10 @@
-using System.Linq;
-using Godot;
 using RensaSimulator.data.scene;
 
 namespace RensaSimulator.data.game;
 
 public static class GameManager {
     // Saves Data
-    public static Map CurrentMap { get; set; }
+    public static Map CurrentMap { get; set; } = null!;
 
     public static RouteDto CurrentRouteDto {
         set => RouteManager = new RouteManager(value);
@@ -18,8 +16,8 @@ public static class GameManager {
 
     // Runtime Data
     public static double Time { get; set; }
-    public static TrainManager TrainManager;
-    public static RouteManager RouteManager;
+    public static TrainManager TrainManager = null!;
+    public static RouteManager RouteManager = null!;
 
     public static void Tick(double deltaTime) {
         TrainManager.Tick(deltaTime);
